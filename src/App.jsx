@@ -12,6 +12,7 @@ import EventDetailPage from './pages/EventDetailPage';
 import CreateEventPage from './pages/CreateEventPage';
 import CommunityDetailPage from './pages/CommunityDetailPage';
 import CreateCommunityPage from './pages/CreateCommunityPage';
+import CommunitiesPage from './pages/CommunitiesPage';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/events/:id" element={<EventDetailPage />} />
                 <Route path="/events/create" element={<CreateEventPage />} />
+                <Route path="/communities" element={<CommunitiesPage />} />
                 <Route path="/communities/:id" element={<CommunityDetailPage />} />
                 <Route path="/communities/create" element={<CreateCommunityPage />} />
               </Routes>
