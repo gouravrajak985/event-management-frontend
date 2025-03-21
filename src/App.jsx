@@ -9,6 +9,7 @@ import OTPVerificationPage from './pages/auth/OTPVerificationPage';
 import CreatePasswordPage from './pages/auth/CreatePasswordPage';
 import CreateProfilePage from './pages/auth/CreateProfilePage';
 import EventDetailPage from './pages/EventDetailPage';
+import EventsPage from './pages/EventsPage';
 import CreateEventPage from './pages/CreateEventPage';
 import CommunityDetailPage from './pages/CommunityDetailPage';
 import CreateCommunityPage from './pages/CreateCommunityPage';
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/events" element={<EventsPage />} />
                 <Route path="/events/:id" element={<EventDetailPage />} />
                 <Route path="/events/create" element={<CreateEventPage />} />
                 <Route path="/communities" element={<CommunitiesPage />} />
