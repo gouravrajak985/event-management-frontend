@@ -43,7 +43,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans overflow-hidden;
+    @apply bg-background text-foreground font-sans;
   }
 }
 
@@ -73,20 +73,30 @@
     focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  .custom-scrollbar {
-    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600 dark:hover:scrollbar-thumb-gray-500;
+  .scrollable-content {
+    @apply h-[calc(100vh-4rem)] overflow-y-auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera */
+    }
+  }
+
+  .horizontal-scroll {
+    @apply overflow-x-auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari and Opera */
+    }
   }
 
   .main-layout {
-    @apply pl-20 pt-16 min-h-screen bg-background flex flex-col;
+    @apply md:pl-20 pt-16 pb-20 md:pb-0 min-h-screen bg-background;
   }
 
   .main-content {
-    @apply flex-1 overflow-hidden;
-  }
-
-  .scrollable-content {
-    @apply h-[calc(100vh-4rem)] overflow-y-auto custom-scrollbar;
+    @apply flex-1;
   }
 
   .banner-container {
@@ -95,33 +105,5 @@
 
   .banner-image {
     @apply w-full h-[300px] rounded-lg overflow-hidden;
-  }
-}
-
-/* Custom Scrollbar Styles */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(209 213 219);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(156 163 175);
-}
-
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-thumb {
-    background-color: rgb(75 85 99);
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(107 114 128);
   }
 }

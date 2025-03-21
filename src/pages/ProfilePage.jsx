@@ -42,64 +42,69 @@ function ProfilePage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Profile Header */}
-      <div className="card mb-8">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-4">
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-20 h-20 rounded-full ring-2 ring-primary/10"
-            />
-            <div>
-              <h1 className="text-2xl font-bold">{user.name}</h1>
-              <p className="text-muted-foreground">{user.username}</p>
-              <p className="mt-2">{user.bio}</p>
+    <div className="md:pl-20 pt-16 pb-20 md:pb-0 min-h-screen bg-background">
+      <div className="max-w-3xl mx-auto p-4 md:p-8">
+        {/* Profile Header */}
+        <div className="card mb-6 md:mb-8">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 md:gap-6">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-20 h-20 rounded-full ring-2 ring-primary/10"
+              />
+              <div className="text-center md:text-left">
+                <h1 className="text-xl md:text-2xl font-bold">{user.name}</h1>
+                <p className="text-muted-foreground">{user.username}</p>
+                <p className="mt-2 text-sm md:text-base">{user.bio}</p>
+              </div>
             </div>
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2 w-full md:w-auto justify-center"
+            >
+              <PencilIcon className="h-4 w-4" />
+              Edit Profile
+            </Button>
           </div>
-          <Button variant="outline" className="flex items-center gap-2">
-            <PencilIcon className="h-4 w-4" />
-            Edit Profile
-          </Button>
         </div>
+
+        {/* Tabs */}
+        <Tabs defaultValue="events" className="space-y-6">
+          <TabsList className="w-full justify-start">
+            <TabsTrigger value="events">Registered Events</TabsTrigger>
+            <TabsTrigger value="communities">Followed Communities</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="events" className="space-y-4">
+            {registeredEvents.map((event) => (
+              <div key={event.id} className="card flex flex-col md:flex-row justify-between md:items-center gap-2 md:gap-0">
+                <div>
+                  <h3 className="text-base md:text-lg font-semibold">{event.title}</h3>
+                  <p className="text-sm text-muted-foreground">{event.date}</p>
+                </div>
+                <span className="px-3 py-1 rounded-full text-sm bg-secondary text-secondary-foreground self-start md:self-auto">
+                  {event.status}
+                </span>
+              </div>
+            ))}
+          </TabsContent>
+
+          <TabsContent value="communities" className="space-y-4">
+            {followedCommunities.map((community) => (
+              <div key={community.id} className="card flex flex-col md:flex-row justify-between md:items-center gap-2 md:gap-0">
+                <div>
+                  <h3 className="text-base md:text-lg font-semibold">{community.name}</h3>
+                  <p className="text-sm text-muted-foreground">{community.members} members</p>
+                </div>
+                <span className="px-3 py-1 rounded-full text-sm bg-secondary text-secondary-foreground self-start md:self-auto">
+                  {community.role}
+                </span>
+              </div>
+            ))}
+          </TabsContent>
+        </Tabs>
       </div>
-
-      {/* Tabs */}
-      <Tabs defaultValue="events" className="space-y-6">
-        <TabsList className="w-full justify-start">
-          <TabsTrigger value="events">Registered Events</TabsTrigger>
-          <TabsTrigger value="communities">Followed Communities</TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="events" className="space-y-4">
-          {registeredEvents.map((event) => (
-            <div key={event.id} className="card flex justify-between items-center">
-              <div>
-                <h3 className="text-lg font-semibold">{event.title}</h3>
-                <p className="text-muted-foreground">{event.date}</p>
-              </div>
-              <span className="px-3 py-1 rounded-full text-sm bg-secondary text-secondary-foreground">
-                {event.status}
-              </span>
-            </div>
-          ))}
-        </TabsContent>
-
-        <TabsContent value="communities" className="space-y-4">
-          {followedCommunities.map((community) => (
-            <div key={community.id} className="card flex justify-between items-center">
-              <div>
-                <h3 className="text-lg font-semibold">{community.name}</h3>
-                <p className="text-muted-foreground">{community.members} members</p>
-              </div>
-              <span className="px-3 py-1 rounded-full text-sm bg-secondary text-secondary-foreground">
-                {community.role}
-              </span>
-            </div>
-          ))}
-        </TabsContent>
-      </Tabs>
     </div>
   );
 }

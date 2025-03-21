@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BellIcon, UserIcon } from '@heroicons/react/24/outline';
+import { BellIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Input } from '../ui/input';
 
 function Navbar() {
@@ -20,6 +20,9 @@ function Navbar() {
         </div>
         
         <div className="flex items-center gap-4">
+          <button className="md:hidden p-2 rounded-full hover:bg-secondary">
+            <MagnifyingGlassIcon className="h-5 w-5" />
+          </button>
           <button className="p-2 rounded-full hover:bg-secondary">
             <BellIcon className="h-5 w-5" />
           </button>

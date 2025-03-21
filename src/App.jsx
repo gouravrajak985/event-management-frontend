@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
+import MobileNav from './components/layout/MobileNav';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/auth/LoginPage';
@@ -26,13 +27,16 @@ function App() {
         <Route path="/create-password" element={<CreatePasswordPage />} />
         <Route path="/create-profile" element={<CreateProfilePage />} />
 
-        {/* Main routes with navbar and sidebar */}
+        {/* Main routes with navbar and navigation */}
         <Route
           path="/*"
           element={
             <>
               <Navbar />
-              <Sidebar />
+              <div className="hidden md:block">
+                <Sidebar />
+              </div>
+              <MobileNav />
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/home" element={<HomePage />} />

@@ -50,20 +50,21 @@ function EventsPage() {
   ];
 
   return (
-    <div className="pl-20 pt-16 min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-bold">Events</h1>
+    <div className="md:pl-20 pt-16 pb-20 md:pb-0 min-h-screen bg-background">
+      <div className="max-w-7xl mx-auto p-4 md:p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-xl md:text-2xl font-bold">Events</h1>
           <Link
             to="/events/create"
-            className="inline-flex items-center px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+            className="inline-flex items-center px-3 md:px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-sm"
           >
-            <PlusIcon className="h-5 w-5 mr-2" />
-            Create Event
+            <PlusIcon className="h-5 w-5 mr-1 md:mr-2" />
+            <span className="hidden md:inline">Create Event</span>
+            <span className="md:hidden">New</span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {events.map((event) => (
             <Link
               key={event.id}
@@ -78,21 +79,21 @@ function EventsPage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <h3 className="font-medium text-lg mb-2">{event.title}</h3>
+                <h3 className="font-medium text-base md:text-lg mb-2">{event.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
                   {event.description}
                 </p>
-                <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="space-y-2 text-xs md:text-sm text-muted-foreground">
                   <div className="flex items-center">
-                    <CalendarIcon className="h-4 w-4 mr-2" />
-                    {event.date}, {event.time}
+                    <CalendarIcon className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">{event.date}, {event.time}</span>
                   </div>
                   <div className="flex items-center">
-                    <MapPinIcon className="h-4 w-4 mr-2" />
-                    {event.location}
+                    <MapPinIcon className="h-4 w-4 mr-2 flex-shrink-0" />
+                    <span className="truncate">{event.location}</span>
                   </div>
                   <div className="flex items-center">
-                    <UserGroupIcon className="h-4 w-4 mr-2" />
+                    <UserGroupIcon className="h-4 w-4 mr-2 flex-shrink-0" />
                     {event.attendees}/{event.capacity} attending
                   </div>
                 </div>
