@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainLayout from './components/layout/MainLayout';
-import LandingPage from './pages/LandingPage';
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
+import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/auth/LoginPage';
 import SignupPage from './pages/auth/SignupPage';
 import OTPVerificationPage from './pages/auth/OTPVerificationPage';
 import CreatePasswordPage from './pages/auth/CreatePasswordPage';
 import CreateProfilePage from './pages/auth/CreateProfilePage';
-import HomePage from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
 import EventDetailPage from './pages/EventDetailPage';
 import CommunityDetailPage from './pages/CommunityDetailPage';
 import CreateCommunityPage from './pages/CreateCommunityPage';
@@ -16,20 +16,31 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Auth routes without navbar and footer */}
+        {/* Auth routes without navbar and sidebar */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/verify-otp" element={<OTPVerificationPage />} />
         <Route path="/create-password" element={<CreatePasswordPage />} />
         <Route path="/create-profile" element={<CreateProfilePage />} />
 
-        {/* Main routes with navbar and footer */}
-        <Route path="/" element={<MainLayout><LandingPage /></MainLayout>} />
-        <Route path="/home" element={<MainLayout><HomePage /></MainLayout>} />
-        <Route path="/profile" element={<MainLayout><ProfilePage /></MainLayout>} />
-        <Route path="/events/:id" element={<MainLayout><EventDetailPage /></MainLayout>} />
-        <Route path="/communities/:id" element={<MainLayout><CommunityDetailPage /></MainLayout>} />
-        <Route path="/communities/create" element={<MainLayout><CreateCommunityPage /></MainLayout>} />
+        {/* Main routes with navbar and sidebar */}
+        <Route
+          path="/*"
+          element={
+            <>
+              <Navbar />
+              <Sidebar />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/events/:id" element={<EventDetailPage />} />
+                <Route path="/communities/:id" element={<CommunityDetailPage />} />
+                <Route path="/communities/create" element={<CreateCommunityPage />} />
+              </Routes>
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Tab } from '@headlessui/react';
 import { PencilIcon } from '@heroicons/react/24/outline';
+import { Button } from '../components/ui/button';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
 
 function ProfilePage() {
   const [user] = useState({
@@ -17,7 +18,12 @@ function ProfilePage() {
       date: "March 15, 2024",
       status: "Upcoming"
     },
-    // Add more events...
+    {
+      id: 2,
+      title: "Coding Workshop",
+      date: "March 20, 2024",
+      status: "Registered"
+    }
   ];
 
   const followedCommunities = [
@@ -27,11 +33,16 @@ function ProfilePage() {
       members: 250,
       role: "Member"
     },
-    // Add more communities...
+    {
+      id: 2,
+      name: "Design Club",
+      members: 180,
+      role: "Moderator"
+    }
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="container mx-auto px-4 py-8">
       {/* Profile Header */}
       <div className="card mb-8">
         <div className="flex items-start justify-between">
@@ -39,76 +50,56 @@ function ProfilePage() {
             <img
               src={user.avatar}
               alt={user.name}
-              className="w-20 h-20 rounded-full ring-2 ring-neon-cyan/30"
+              className="w-20 h-20 rounded-full ring-2 ring-primary/10"
             />
             <div>
-              <h1 className="text-2xl font-bold text-white">{user.name}</h1>
-              <p className="text-gray-400">{user.username}</p>
-              <p className="text-gray-300 mt-2">{user.bio}</p>
+              <h1 className="text-2xl font-bold">{user.name}</h1>
+              <p className="text-muted-foreground">{user.username}</p>
+              <p className="mt-2">{user.bio}</p>
             </div>
           </div>
-          <button className="btn-secondary">
-            <PencilIcon className="h-5 w-5" />
-            <span className="ml-2">Edit Profile</span>
-          </button>
+          <Button variant="outline" className="flex items-center gap-2">
+            <PencilIcon className="h-4 w-4" />
+            Edit Profile
+          </Button>
         </div>
       </div>
 
       {/* Tabs */}
-      <Tab.Group>
-        <Tab.List className="flex space-x-4 border-b border-primary-700/50 mb-8">
-          <Tab className={({ selected }) =>
-            `px-4 py-2 text-sm font-medium focus:outline-none ${
-              selected
-                ? 'text-neon-cyan border-b-2 border-neon-cyan'
-                : 'text-gray-400 hover:text-gray-300'
-            }`
-          }>
-            Registered Events
-          </Tab>
-          <Tab className={({ selected }) =>
-            `px-4 py-2 text-sm font-medium focus:outline-none ${
-              selected
-                ? 'text-neon-cyan border-b-2 border-neon-cyan'
-                : 'text-gray-400 hover:text-gray-300'
-            }`
-          }>
-            Followed Communities
-          </Tab>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
-            <div className="space-y-4">
-              {registeredEvents.map((event) => (
-                <div key={event.id} className="card flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{event.title}</h3>
-                    <p className="text-gray-400">{event.date}</p>
-                  </div>
-                  <span className="px-3 py-1 rounded-full text-sm bg-primary-700 text-neon-cyan">
-                    {event.status}
-                  </span>
-                </div>
-              ))}
+      <Tabs defaultValue="events" className="space-y-6">
+        <TabsList className="w-full justify-start">
+          <TabsTrigger value="events">Registered Events</TabsTrigger>
+          <TabsTrigger value="communities">Followed Communities</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="events" className="space-y-4">
+          {registeredEvents.map((event) => (
+            <div key={event.id} className="card flex justify-between items-center">
+              <div>
+                <h3 className="text-lg font-semibold">{event.title}</h3>
+                <p className="text-muted-foreground">{event.date}</p>
+              </div>
+              <span className="px-3 py-1 rounded-full text-sm bg-secondary text-secondary-foreground">
+                {event.status}
+              </span>
             </div>
-          </Tab.Panel>
-          <Tab.Panel>
-            <div className="space-y-4">
-              {followedCommunities.map((community) => (
-                <div key={community.id} className="card flex justify-between items-center">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{community.name}</h3>
-                    <p className="text-gray-400">{community.members} members</p>
-                  </div>
-                  <span className="px-3 py-1 rounded-full text-sm bg-primary-700 text-white">
-                    {community.role}
-                  </span>
-                </div>
-              ))}
+          ))}
+        </TabsContent>
+
+        <TabsContent value="communities" className="space-y-4">
+          {followedCommunities.map((community) => (
+            <div key={community.id} className="card flex justify-between items-center">
+              <div>
+                <h3 className="text-lg font-semibold">{community.name}</h3>
+                <p className="text-muted-foreground">{community.members} members</p>
+              </div>
+              <span className="px-3 py-1 rounded-full text-sm bg-secondary text-secondary-foreground">
+                {community.role}
+              </span>
             </div>
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+          ))}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

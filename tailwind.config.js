@@ -1,62 +1,74 @@
+/** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ["class"],
   content: [
     "./index.html",
     "./src/**/*.{js,jsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          900: '#0f0c29',
-          800: '#1a1744',
-          700: '#24243e',
-          600: '#302b63',
-          500: '#3b3576',
-          400: '#463f89',
-          300: '#514a9c',
-          200: '#6158b5',
-          100: '#7a73c7',
-          50: '#9490d8',
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          900: '#1e1e2e',
-          800: '#292942',
-          700: '#353556',
-          600: '#41416a',
-          500: '#4d4d7e',
-          400: '#595992',
-          300: '#6565a6',
-          200: '#7171ba',
-          100: '#8484cc',
-          50: '#9797de',
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
-        neon: {
-          pink: '#ff007f',
-          cyan: '#00d4ff',
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
-      backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
-        'gradient-neon': 'linear-gradient(to right, #00d4ff, #ff007f)',
-      },
-      animation: {
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'float': 'float 6s ease-in-out infinite',
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        glow: {
-          '0%': { 'box-shadow': '0 0 10px rgba(0,212,255,0.5)' },
-          '100%': { 'box-shadow': '0 0 20px rgba(0,212,255,0.8)' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }
